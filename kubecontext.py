@@ -7,7 +7,10 @@ class Py3status:
     def _getns(self, ctxname):
         for ctxtmp in self.kube['contexts']:
             if ctxtmp['name'] == ctxname:
-                return ctxtmp['context']['namespace']
+                if 'namespace' in ctxtmp['context'].keys():
+                    return ctxtmp['context']['namespace']
+                else:
+                    return 'default'
 
     def kubestatus(self):
         SYMBOL = u'\u2388'
